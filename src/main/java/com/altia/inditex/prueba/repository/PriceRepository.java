@@ -18,7 +18,7 @@ public interface PriceRepository extends JpaRepository<PricesEntity, ComposeId> 
 	public Optional<PricesEntity> findById(ComposeId id);
 	
 	
-    @Query("SELECT p FROM PricesEntity p WHERE p.id.productId = :productId AND p.id.brandId = :brandId AND :startDate between p.startDate and p.endDate")
+	@Query("SELECT p FROM PricesEntity p WHERE p.id.productId = :productId AND p.id.brandId = :brandId AND :startDate between p.startDate and p.endDate")
 	public List<PricesEntity> findByGreaterStartDateAndId(@Param("startDate") LocalDateTime fecha, 
 			@Param("brandId") Long brandId,
 			@Param("productId") Long productId);

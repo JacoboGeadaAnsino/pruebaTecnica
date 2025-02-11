@@ -31,7 +31,7 @@ public class ConsultaControllerAdvice extends ResponseEntityExceptionHandler {
 	public ResponseEntity<ConsultaError> handle(MethodArgumentTypeMismatchException exception, HttpServletRequest request) throws IOException {
 		log.error("Error de formato {} ", exception.getMessage());
 		val consultaError  = new ConsultaError();
-		consultaError.setStatus(HttpStatus.BAD_REQUEST);
+		consultaError.setStatus(400);
 		consultaError.setErrorResponse("Error de formato de datos");
 		switch (exception.getName()) {
 			case "brandId": {
@@ -40,7 +40,7 @@ public class ConsultaControllerAdvice extends ResponseEntityExceptionHandler {
 				} else {
 					log.error("Error generico de datos");
 					consultaError.setErrorCode(5000L);
-					consultaError.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+					consultaError.setStatus(500);
 				}
 				break;
 			}
@@ -50,7 +50,7 @@ public class ConsultaControllerAdvice extends ResponseEntityExceptionHandler {
 				} else {
 					log.error("Error generico de datos");
 					consultaError.setErrorCode(5000L);
-					consultaError.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+					consultaError.setStatus(500);
 				}
 				break;
 			}
@@ -60,16 +60,16 @@ public class ConsultaControllerAdvice extends ResponseEntityExceptionHandler {
 				} else {
 					log.error("Error generico de datos");
 					consultaError.setErrorCode(5000L);
-					consultaError.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+					consultaError.setStatus(500);
 				}
 				break;
 			}
 		default:
 			log.error("Error desconocido de datos");
 			consultaError.setErrorCode(5000L);
-			consultaError.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+			consultaError.setStatus(500);
 		}
-		return new ResponseEntity<>(consultaError, consultaError.getStatus());
+		return new ResponseEntity<>(consultaError, HttpStatus.valueOf(consultaError.getStatus()));
 
 	}
 	

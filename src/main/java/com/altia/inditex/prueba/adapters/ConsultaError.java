@@ -19,6 +19,6 @@ public class ConsultaError {
 	private String errorResponse;
 	private Long errorCode;
 	@JsonIgnore
-	private HttpStatus status;
+	private Integer status;
 
 }
