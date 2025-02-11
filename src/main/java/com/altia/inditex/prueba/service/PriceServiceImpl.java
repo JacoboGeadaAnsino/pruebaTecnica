@@ -29,7 +29,7 @@ public class PriceServiceImpl implements PriceService {
 								.inicioVigencia(price.getStartDate())
 								.finVigencia(price.getEndDate())
 								.precio(price.getPrice())
-								.tarifa(null)
+								.tarifa(price.getId().getPriceList())
 								.build())
 				.collect(Collectors.toList());
 	}
